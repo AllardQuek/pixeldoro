@@ -118,6 +118,146 @@
   box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
 }
 
+/* Space Rocket Theme Pixels */
+.pixel.platform {
+  background: #696969;
+  box-shadow: inset 1px 1px 0 rgba(128, 128, 128, 0.5);
+}
+
+.pixel.engine {
+  background: #DC143C;
+  border-radius: 0 0 2px 2px;
+  box-shadow: inset 1px 1px 0 rgba(220, 70, 90, 0.5);
+}
+
+.pixel.body {
+  background: #C0C0C0;
+  box-shadow: inset 1px 1px 0 rgba(211, 211, 211, 0.5);
+}
+
+.pixel.window {
+  background: #00BFFF;
+  border-radius: 50%;
+  box-shadow: inset 1px 1px 0 rgba(135, 206, 255, 0.7);
+}
+
+.pixel.nose {
+  background: #FF6347;
+  border-radius: 2px 2px 0 0;
+  box-shadow: inset 1px 1px 0 rgba(255, 127, 80, 0.5);
+}
+
+.pixel.tip {
+  background: #FFD700;
+  border-radius: 50%;
+  box-shadow: 
+    inset 1px 1px 0 rgba(255, 223, 0, 0.7),
+    0 0 3px rgba(255, 215, 0, 0.5);
+}
+
+.pixel.flame {
+  background: #FF4500;
+  border-radius: 1px;
+  box-shadow: inset 1px 1px 0 rgba(255, 99, 71, 0.5);
+  animation: flame-flicker 0.5s ease-in-out infinite alternate;
+}
+
+.pixel.flame-bright {
+  background: #FFD700;
+  border-radius: 1px;
+  box-shadow: 
+    inset 1px 1px 0 rgba(255, 223, 0, 0.7),
+    0 0 4px rgba(255, 69, 0, 0.6);
+  animation: flame-flicker 0.3s ease-in-out infinite alternate;
+}
+
+.pixel.booster {
+  background: #8A2BE2;
+  border-radius: 1px;
+  box-shadow: inset 1px 1px 0 rgba(138, 63, 226, 0.5);
+}
+
+.pixel.star {
+  background: #FFFF00;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  box-shadow: 0 0 2px rgba(255, 255, 0, 0.8);
+}
+
+.pixel.star-bright {
+  background: #FFFFFF;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.9);
+  animation: star-twinkle 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes flame-flicker {
+  0% { opacity: 0.8; transform: scaleY(1); }
+  100% { opacity: 1; transform: scaleY(1.1); }
+}
+
+@keyframes star-twinkle {
+  0% { opacity: 0.7; transform: rotate(45deg) scale(1); }
+  100% { opacity: 1; transform: rotate(45deg) scale(1.2); }
+}
+
+/* Sunflower Theme Pixels */
+.pixel.sun-petal {
+  background: #FFD700;
+  border-radius: 2px 0 2px 0;
+  box-shadow: inset 1px 1px 0 rgba(255, 223, 0, 0.7);
+  animation: sun-glow 2s ease-in-out infinite alternate;
+}
+
+.pixel.sun-center {
+  background: #8B4513;
+  border-radius: 50%;
+  box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+}
+
+@keyframes sun-glow {
+  0% { box-shadow: inset 1px 1px 0 rgba(255, 223, 0, 0.7); }
+  100% { box-shadow: inset 1px 1px 0 rgba(255, 223, 0, 0.7), 0 0 3px rgba(255, 215, 0, 0.5); }
+}
+
+/* Rose Theme Pixels */
+.pixel.rose-stem {
+  background: #228B22;
+  box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+}
+
+.pixel.thorn {
+  background: #8B4513;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+}
+
+.pixel.rose-leaf {
+  background: #32CD32;
+  border-radius: 2px 1px 0 2px;
+  box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+}
+
+.pixel.rose-bud {
+  background: #DC143C;
+  border-radius: 2px;
+  box-shadow: inset 1px 1px 0 rgba(220, 70, 90, 0.5);
+}
+
+.pixel.rose-petal {
+  background: #FF1493;
+  border-radius: 3px 1px 3px 1px;
+  box-shadow: inset 1px 1px 0 rgba(255, 105, 180, 0.5);
+  animation: rose-bloom 3s ease-in-out infinite alternate;
+}
+
+@keyframes rose-bloom {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
 /* Component positioning */
 .pixel-soil {
   position: relative;

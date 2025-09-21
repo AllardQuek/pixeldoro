@@ -48,10 +48,16 @@ export const PixelFlower: React.FC<PixelFlowerProps> = ({
     switch (currentTheme.id) {
       case 'classic-flower':
         return '🌱';
-      case 'winter-tree':
+      case 'oak-tree':
         return '🌿';
+      case 'space-rocket':
+        return '🚀';
+      case 'sunflower':
+        return '🌻';
+      case 'rose':
+        return '🌹';
       default:
-        return '🌱';
+        return '�';
     }
   };
 

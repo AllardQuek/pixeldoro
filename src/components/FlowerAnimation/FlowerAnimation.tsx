@@ -3,7 +3,7 @@ import type { AnimationProgress, BasicTheme } from '../../types';
 import type { PomodoroState } from '../../types';
 import { formatTime } from '../../utils/timer';
 import { PixelFlower } from './PixelFlower';
-import './PixelFlower.css';
+import './PixelArt.css';
 
 interface FlowerAnimationProps {
   animation: AnimationProgress;

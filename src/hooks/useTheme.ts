@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
-import { flowerTheme, treeTheme } from '../data/themes';
+import { flowerTheme, treeTheme, rocketTheme, sunflowerTheme, roseTheme } from '../data/themes';
 import type { BasicTheme } from '../types';
 
-const availableThemes = [flowerTheme, treeTheme];
+const availableThemes = [flowerTheme, treeTheme, rocketTheme, sunflowerTheme, roseTheme];
 
 // Get random theme for variety
 const getRandomTheme = (): BasicTheme => {
