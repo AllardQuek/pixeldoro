@@ -6,7 +6,7 @@ export const DEVELOPMENT_MODE = true;
 // Timer configuration constants
 export const TIMER_CONFIG: TimerConfig = DEVELOPMENT_MODE ? {
   // Development: Much shorter durations for testing
-  workDuration: 25, // 25 seconds instead of 25 minutes
+  workDuration: 10, // 10 seconds instead of 25 minutes
   shortBreakDuration: 10, // 10 seconds instead of 5 minutes
   longBreakDuration: 15, // 15 seconds instead of 15 minutes
   cyclesBeforeLongBreak: 4,
@@ -90,4 +90,43 @@ export const getStageProgress = (overallProgress: number): number => {
   const progressInStage = progressPercent - stage.startPercent;
   
   return Math.max(0, Math.min(1, progressInStage / stageRange));
+};
+
+// Enhanced granular progress calculation for per-second pixel changes
+export const getGranularProgress = (timeRemaining: number, totalDuration: number) => {
+  const overallProgress = calculateProgress(timeRemaining, totalDuration);
+  const currentStage = getFlowerStage(overallProgress);
+  const stageProgress = getStageProgress(overallProgress);
+  
+  // Calculate elapsed time
+  const elapsedSeconds = totalDuration - timeRemaining;
+  
+  // Dynamic pixel count based on duration for scalability
+  // Minimum 1 pixel per 2 seconds for good granularity
+  const pixelsPerStage = Math.max(2, Math.floor(totalDuration / (5 * 2))); // 5 stages, 2 seconds per pixel minimum
+  const totalPixels = pixelsPerStage * FLOWER_STAGES.length;
+  
+  // Calculate current pixel index for progressive appearance
+  const currentPixelIndex = totalPixels > 0 && totalDuration > 0 
+    ? Math.floor((elapsedSeconds / totalDuration) * totalPixels)
+    : 0;
+  
+  // Pixels within current stage
+  const pixelsInCurrentStage = Math.floor(stageProgress * pixelsPerStage);
+  
+  // Calculate interval for new pixel appearance
+  const pixelInterval = totalPixels > 0 ? Math.max(1, Math.floor(totalDuration / totalPixels)) : 1;
+  
+  return {
+    overallProgress,
+    currentStage,
+    stageProgress,
+    totalPixels,
+    pixelsPerStage,
+    currentPixelIndex,
+    pixelsInCurrentStage,
+    elapsedSeconds,
+    shouldShowNewPixel: elapsedSeconds > 0 && elapsedSeconds % pixelInterval === 0,
+    pixelInterval, // How often new pixels appear (in seconds)
+  };
 };

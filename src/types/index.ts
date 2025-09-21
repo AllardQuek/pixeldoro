@@ -13,6 +13,18 @@ export interface AnimationProgress {
   stage: 'seed' | 'sprout' | 'leaves' | 'bud' | 'bloom';
   progress: number; // 0-1 within current stage
   overallProgress: number; // 0-1 for entire session
+  granularData?: {
+    overallProgress: number;
+    currentStage: FlowerStage;
+    stageProgress: number;
+    totalPixels: number;
+    pixelsPerStage: number;
+    currentPixelIndex: number;
+    pixelsInCurrentStage: number;
+    elapsedSeconds: number;
+    shouldShowNewPixel: boolean;
+    pixelInterval: number;
+  };
 }
 
 export interface TimerConfig {
