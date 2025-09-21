@@ -22,6 +22,7 @@ export interface BasicTheme {
   name: string;
   gridSize: { width: number; height: number };
   pixels: ThemePixel[]; // All pixels are progressive, including base/foundation
+  stageNames?: string[]; // Optional custom stage names for this theme
 }
 
 export interface AnimationProgress {

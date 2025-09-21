@@ -82,13 +82,14 @@
   background: #FF4081;
   border-radius: 2px;
   box-shadow: inset 1px 1px 0 rgba(255, 138, 180, 0.5);
-  animation: petal-glow 3s ease-in-out infinite alternate;
+  animation: petal-breeze 3.5s ease-in-out infinite;
 }
 
 .pixel.center {
   background: #FFEB3B;
   border-radius: 50%;
   box-shadow: inset 1px 1px 0 rgba(255, 241, 118, 0.7);
+  animation: center-breathe 4s ease-in-out infinite;
 }
 
 .pixel.center-bright {
@@ -97,25 +98,109 @@
   box-shadow: 
     inset 1px 1px 0 rgba(255, 213, 79, 0.7),
     0 0 4px rgba(255, 193, 7, 0.5);
-  animation: center-sparkle 2s ease-in-out infinite alternate;
+  animation: center-sparkle 2.8s ease-in-out infinite;
 }
 
 /* Oak Tree Theme Pixels */
 .pixel.trunk {
   background: #8B4513;
   box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+  animation: trunk-sway 6s ease-in-out infinite alternate;
 }
 
 .pixel.branch {
   background: #A0522D;
   border-radius: 1px;
   box-shadow: inset 1px 1px 0 rgba(160, 102, 65, 0.5);
+  animation: branch-wave 2.2s ease-in-out infinite;
 }
 
 .pixel.leaves {
   background: #228B22;
   border-radius: 2px 1px 2px 1px;
   box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+  animation: leaf-dance 1.4s ease-in-out infinite;
+}
+
+.pixel.leaves-top {
+  background: #32CD32;
+  border-radius: 2px 1px 2px 1px;
+  box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+  animation: leaf-dance 1.4s ease-in-out infinite;
+  animation-delay: -0.2s;
+}
+
+.pixel.leaves-side {
+  background: #228B22;
+  border-radius: 2px 1px 2px 1px;
+  box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+  animation: leaf-dance 1.4s ease-in-out infinite;
+  animation-delay: -0.5s;
+}
+
+.pixel.leaves-edge {
+  background: #1E7B1E;
+  border-radius: 2px 1px 2px 1px;
+  box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+  animation: leaf-dance 1.4s ease-in-out infinite;
+  animation-delay: -0.8s;
+}
+
+@keyframes trunk-sway {
+  0% { 
+    transform: translateX(0px) rotate(0deg);
+    box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+  }
+  100% { 
+    transform: translateX(0.5px) rotate(0.2deg);
+    box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.6);
+  }
+}
+
+@keyframes branch-wave {
+  0% { 
+    transform: rotate(0deg) scale(1) translateX(0px);
+    filter: brightness(1);
+  }
+  25% {
+    transform: rotate(2deg) scale(1.03) translateX(1px);
+    filter: brightness(1.05);
+  }
+  75% {
+    transform: rotate(-2deg) scale(1.03) translateX(-1px);
+    filter: brightness(1.05);
+  }
+  100% { 
+    transform: rotate(0deg) scale(1) translateX(0px);
+    filter: brightness(1);
+  }
+}
+
+@keyframes leaf-dance {
+  0% { 
+    transform: scale(1) rotate(0deg) translateY(0px) translateX(0px);
+    filter: brightness(1) hue-rotate(0deg);
+    box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+  }
+  25% {
+    transform: scale(1.12) rotate(4deg) translateY(-2px) translateX(2px);
+    filter: brightness(1.2) hue-rotate(8deg);
+    box-shadow: 
+      inset 1px 1px 0 rgba(60, 179, 113, 0.7),
+      0 0 4px rgba(34, 139, 34, 0.5);
+  }
+  75% {
+    transform: scale(1.12) rotate(-4deg) translateY(-2px) translateX(-2px);
+    filter: brightness(1.2) hue-rotate(-8deg);
+    box-shadow: 
+      inset 1px 1px 0 rgba(60, 179, 113, 0.7),
+      0 0 4px rgba(34, 139, 34, 0.5);
+  }
+  100% { 
+    transform: scale(1) rotate(0deg) translateY(0px) translateX(0px);
+    filter: brightness(1) hue-rotate(0deg);
+    box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+  }
 }
 
 /* Space Rocket Theme Pixels */
@@ -206,19 +291,101 @@
 .pixel.sun-petal {
   background: #FFD700;
   border-radius: 2px 0 2px 0;
-  box-shadow: inset 1px 1px 0 rgba(255, 223, 0, 0.7);
-  animation: sun-glow 2s ease-in-out infinite alternate;
+  box-shadow: 
+    inset 1px 1px 0 rgba(255, 223, 0, 0.7),
+    0 0 2px rgba(255, 215, 0, 0.4);
+  animation: sun-wave 2.8s ease-in-out infinite;
+}
+
+.pixel.sun-petal:nth-child(2n) {
+  animation-delay: -0.4s;
+}
+
+.pixel.sun-petal:nth-child(3n) {
+  animation-delay: -0.8s;
+}
+
+.pixel.sun-petal:nth-child(4n) {
+  animation-delay: -1.2s;
 }
 
 .pixel.sun-center {
   background: #8B4513;
   border-radius: 50%;
   box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+  animation: sun-rotation 5s linear infinite;
 }
 
-@keyframes sun-glow {
-  0% { box-shadow: inset 1px 1px 0 rgba(255, 223, 0, 0.7); }
-  100% { box-shadow: inset 1px 1px 0 rgba(255, 223, 0, 0.7), 0 0 3px rgba(255, 215, 0, 0.5); }
+@keyframes sun-wave {
+  0% { 
+    transform: scale(1) rotate(0deg) translateX(0px);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 223, 0, 0.7),
+      0 0 2px rgba(255, 215, 0, 0.4);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.12) rotate(3deg) translateX(2px);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 223, 0, 0.8),
+      0 0 8px rgba(255, 215, 0, 0.8);
+    filter: brightness(1.25);
+  }
+  50% {
+    transform: scale(1.08) rotate(0deg) translateX(0px);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 223, 0, 0.9),
+      0 0 6px rgba(255, 215, 0, 0.6);
+    filter: brightness(1.15);
+  }
+  75% {
+    transform: scale(1.12) rotate(-3deg) translateX(-2px);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 223, 0, 0.8),
+      0 0 8px rgba(255, 215, 0, 0.8);
+    filter: brightness(1.25);
+  }
+  100% { 
+    transform: scale(1) rotate(0deg) translateX(0px);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 223, 0, 0.7),
+      0 0 2px rgba(255, 215, 0, 0.4);
+    filter: brightness(1);
+  }
+}
+
+@keyframes sun-rotation {
+  0% { 
+    transform: scale(1) rotate(0deg);
+    box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 
+      inset 1px 1px 0 rgba(139, 101, 19, 0.6),
+      0 0 4px rgba(139, 101, 19, 0.4);
+    filter: brightness(1.1);
+  }
+  50% {
+    transform: scale(1.15) rotate(180deg);
+    box-shadow: 
+      inset 1px 1px 0 rgba(139, 101, 19, 0.7),
+      0 0 6px rgba(139, 101, 19, 0.6);
+    filter: brightness(1.2);
+  }
+  75% {
+    transform: scale(1.1) rotate(270deg);
+    box-shadow: 
+      inset 1px 1px 0 rgba(139, 101, 19, 0.6),
+      0 0 4px rgba(139, 101, 19, 0.4);
+    filter: brightness(1.1);
+  }
+  100% { 
+    transform: scale(1) rotate(360deg);
+    box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+    filter: brightness(1);
+  }
 }
 
 /* Rose Theme Pixels */
@@ -232,30 +399,134 @@
   border-radius: 1px;
   transform: rotate(45deg);
   box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+  animation: thorn-glint 3s ease-in-out infinite;
 }
 
 .pixel.rose-leaf {
   background: #32CD32;
   border-radius: 2px 1px 0 2px;
   box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+  animation: rose-leaf-flutter 2.7s ease-in-out infinite;
 }
 
 .pixel.rose-bud {
   background: #DC143C;
   border-radius: 2px;
   box-shadow: inset 1px 1px 0 rgba(220, 70, 90, 0.5);
+  animation: rose-bud-pulse 3.2s ease-in-out infinite;
 }
 
 .pixel.rose-petal {
   background: #FF1493;
   border-radius: 3px 1px 3px 1px;
   box-shadow: inset 1px 1px 0 rgba(255, 105, 180, 0.5);
-  animation: rose-bloom 3s ease-in-out infinite alternate;
+  animation: rose-bloom 2.5s ease-in-out infinite;
+}
+
+.pixel.rose-petal:nth-child(2n) {
+  animation-delay: -0.5s;
+}
+
+.pixel.rose-petal:nth-child(3n) {
+  animation-delay: -1s;
 }
 
 @keyframes rose-bloom {
-  0% { transform: scale(1); opacity: 0.9; }
-  100% { transform: scale(1.05); opacity: 1; }
+  0% { 
+    transform: scale(0.9) rotate(0deg); 
+    opacity: 0.85;
+    filter: brightness(1);
+    box-shadow: inset 1px 1px 0 rgba(255, 105, 180, 0.5);
+  }
+  25% {
+    transform: scale(1.05) rotate(2deg);
+    opacity: 0.95;
+    filter: brightness(1.15);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 105, 180, 0.7),
+      0 0 4px rgba(255, 20, 147, 0.4);
+  }
+  50% {
+    transform: scale(1.12) rotate(0deg);
+    opacity: 1;
+    filter: brightness(1.25);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 105, 180, 0.8),
+      0 0 6px rgba(255, 20, 147, 0.6);
+  }
+  75% {
+    transform: scale(1.05) rotate(-2deg);
+    opacity: 0.95;
+    filter: brightness(1.15);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 105, 180, 0.7),
+      0 0 4px rgba(255, 20, 147, 0.4);
+  }
+  100% { 
+    transform: scale(0.9) rotate(0deg); 
+    opacity: 0.85;
+    filter: brightness(1);
+    box-shadow: inset 1px 1px 0 rgba(255, 105, 180, 0.5);
+  }
+}
+
+@keyframes rose-leaf-flutter {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: brightness(1);
+  }
+  33% {
+    transform: rotate(3deg) scale(1.08);
+    filter: brightness(1.1);
+  }
+  66% {
+    transform: rotate(-3deg) scale(1.08);
+    filter: brightness(1.1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes rose-bud-pulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+    box-shadow: inset 1px 1px 0 rgba(220, 70, 90, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    box-shadow: 
+      inset 1px 1px 0 rgba(220, 70, 90, 0.7),
+      0 0 3px rgba(220, 20, 60, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+    box-shadow: inset 1px 1px 0 rgba(220, 70, 90, 0.5);
+  }
+}
+
+@keyframes thorn-glint {
+  0% {
+    transform: rotate(45deg) scale(1);
+    filter: brightness(1);
+    box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.15);
+    filter: brightness(1.4);
+    box-shadow: 
+      inset 1px 1px 0 rgba(139, 101, 19, 0.7),
+      0 0 2px rgba(139, 101, 19, 0.8);
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+    filter: brightness(1);
+    box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+  }
 }
 
 /* Component positioning */
@@ -300,14 +571,57 @@
 }
 
 /* Animations */
-@keyframes petal-glow {
+@keyframes petal-breeze {
   0% {
+    transform: rotate(0deg) scale(1) translateX(0px);
     box-shadow: inset 1px 1px 0 rgba(255, 138, 180, 0.5);
+    filter: brightness(1);
   }
-  100% {
+  25% {
+    transform: rotate(1.5deg) scale(1.03) translateX(1px);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 138, 180, 0.6),
+      0 0 4px rgba(255, 64, 129, 0.4);
+    filter: brightness(1.08);
+  }
+  50% {
+    transform: rotate(0deg) scale(1.05) translateX(0px);
     box-shadow: 
       inset 1px 1px 0 rgba(255, 138, 180, 0.7),
-      0 0 3px rgba(255, 64, 129, 0.3);
+      0 0 6px rgba(255, 64, 129, 0.5);
+    filter: brightness(1.1);
+  }
+  75% {
+    transform: rotate(-1.5deg) scale(1.03) translateX(-1px);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 138, 180, 0.6),
+      0 0 4px rgba(255, 64, 129, 0.4);
+    filter: brightness(1.08);
+  }
+  100% {
+    transform: rotate(0deg) scale(1) translateX(0px);
+    box-shadow: inset 1px 1px 0 rgba(255, 138, 180, 0.5);
+    filter: brightness(1);
+  }
+}
+
+@keyframes center-breathe {
+  0% {
+    transform: scale(1);
+    box-shadow: inset 1px 1px 0 rgba(255, 241, 118, 0.7);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 241, 118, 0.8),
+      0 0 3px rgba(255, 235, 59, 0.6);
+    filter: brightness(1.15);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: inset 1px 1px 0 rgba(255, 241, 118, 0.7);
+    filter: brightness(1);
   }
 }
 
@@ -316,11 +630,29 @@
     box-shadow: 
       inset 1px 1px 0 rgba(255, 213, 79, 0.7),
       0 0 4px rgba(255, 193, 7, 0.5);
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
   }
-  100% {
+  33% {
     box-shadow: 
       inset 1px 1px 0 rgba(255, 213, 79, 0.9),
       0 0 8px rgba(255, 193, 7, 0.8);
+    transform: scale(1.1) rotate(2deg);
+    filter: brightness(1.2);
+  }
+  66% {
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 213, 79, 0.8),
+      0 0 6px rgba(255, 193, 7, 0.7);
+    transform: scale(1.05) rotate(-1deg);
+    filter: brightness(1.1);
+  }
+  100% {
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 213, 79, 0.7),
+      0 0 4px rgba(255, 193, 7, 0.5);
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
   }
 }
 
@@ -389,7 +721,19 @@
   }
   
   .pixel.petal,
-  .pixel.center-bright {
+  .pixel.center-bright,
+  .pixel.flame,
+  .pixel.flame-bright,
+  .pixel.star-bright,
+  .pixel.sun-petal,
+  .pixel.sun-center,
+  .pixel.rose-petal,
+  .pixel.leaves,
+  .pixel.leaves-top,
+  .pixel.leaves-side,
+  .pixel.leaves-edge,
+  .pixel.trunk,
+  .pixel.branch {
     animation: none;
   }
   

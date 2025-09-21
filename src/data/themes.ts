@@ -5,6 +5,7 @@ export const flowerTheme: BasicTheme = {
   id: 'classic-flower',
   name: 'Classic Flower',
   gridSize: { width: 5, height: 7 },
+  stageNames: ['Soil Prep', 'Stem Growth', 'Leaves Emerge', 'Bud Formation', 'Full Bloom'],
   
   // All pixels build progressively: soil → stem → leaves → bloom
   pixels: [
@@ -50,6 +51,7 @@ export const treeTheme: BasicTheme = {
   id: 'oak-tree',
   name: 'Oak Tree',
   gridSize: { width: 7, height: 8 },
+  stageNames: ['Root System', 'Trunk Growth', 'Branch Network', 'Young Leaves', 'Full Canopy'],
   
   // All pixels build progressively: soil → trunk → branches → leaves
   pixels: [
@@ -81,12 +83,12 @@ export const treeTheme: BasicTheme = {
     { type: 'branch', row: 7, col: 4 },
     
     // Stage 4: Leaves fill in (pixels 19-24)
-    { type: 'leaves', row: 7, col: 1 },
+    { type: 'leaves-top', row: 7, col: 1 },
     { type: 'leaves', row: 7, col: 3 },
-    { type: 'leaves', row: 7, col: 5 },
-    { type: 'leaves', row: 7, col: 6 },
+    { type: 'leaves-side', row: 7, col: 5 },
+    { type: 'leaves-edge', row: 7, col: 6 },
     { type: 'leaves', row: 6, col: 2 },
-    { type: 'leaves', row: 6, col: 4 },
+    { type: 'leaves-side', row: 6, col: 4 },
   ]
 };
 
@@ -95,6 +97,7 @@ export const rocketTheme: BasicTheme = {
   id: 'space-rocket',
   name: 'Space Rocket',
   gridSize: { width: 5, height: 9 },
+  stageNames: ['Launchpad', 'Rocket Assembly', 'Ignition', 'Liftoff', 'Deep Space'],
   
   // Progressive build: launchpad → rocket → ignition → liftoff → stars
   pixels: [
@@ -142,6 +145,7 @@ export const sunflowerTheme: BasicTheme = {
   id: 'sunflower',
   name: 'Sunflower',
   gridSize: { width: 7, height: 8 },
+  stageNames: ['Earth Prep', 'Tall Stem', 'Leaf Spread', 'Petal Ring', 'Golden Center'],
   
   // Progressive build: soil → stem → leaves → petals → center
   pixels: [
@@ -188,6 +192,7 @@ export const roseTheme: BasicTheme = {
   id: 'rose',
   name: 'Rose',
   gridSize: { width: 5, height: 8 },
+  stageNames: ['Garden Soil', 'Thorny Stem', 'Rose Leaves', 'Tight Buds', 'Romantic Bloom'],
   
   // Progressive build: soil → stem → thorns → buds → full bloom
   pixels: [
