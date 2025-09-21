@@ -11,6 +11,7 @@ const initialState: PomodoroState = {
   sessionsCompleted: 0,
   currentCycle: 1,
   sessionStartTime: TIMER_CONFIG.workDuration,
+  wasWorkCompleted: false,
 };
 
 // Timer reducer
@@ -83,6 +84,7 @@ function pomodoroReducer(state: PomodoroState, action: TimerAction): PomodoroSta
           isPaused: false,
           sessionsCompleted: newSessionsCompleted,
           currentCycle: shouldTakeLongBreak ? 1 : newCurrentCycle,
+          wasWorkCompleted: true, // Set flag when work session completes
         };
       } else {
         // Break completed, return to work
@@ -93,6 +95,7 @@ function pomodoroReducer(state: PomodoroState, action: TimerAction): PomodoroSta
           sessionStartTime: TIMER_CONFIG.workDuration,
           isActive: false,
           isPaused: false,
+          wasWorkCompleted: false, // Reset flag when starting new work session
         };
       }
     }
@@ -106,6 +109,7 @@ function pomodoroReducer(state: PomodoroState, action: TimerAction): PomodoroSta
           sessionStartTime: TIMER_CONFIG.workDuration,
           isActive: false,
           isPaused: false,
+          wasWorkCompleted: false, // Reset flag when skipping to new work session
         };
       }
       return state;
@@ -118,6 +122,7 @@ function pomodoroReducer(state: PomodoroState, action: TimerAction): PomodoroSta
         sessionStartTime: action.payload, // Track the starting duration
         isActive: false,
         isPaused: false,
+        wasWorkCompleted: false, // Reset flag when setting new time
       };
     }
 

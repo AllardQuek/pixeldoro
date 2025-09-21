@@ -185,6 +185,61 @@ const showNotification = async (message: string) => {
 4. Run tests: `npm test`
 5. Check types: `npm run type-check`
 
+### Development Tools
+
+#### Animation Timeline Preview
+The timeline preview feature allows designers and developers to instantly test animations:
+
+```typescript
+// Enable timeline preview in DevControls
+<DevControls 
+  isDevelopmentMode={true}
+  onTimelineChange={timeline.handleTimelineChange}
+  totalDuration={state.sessionStartTime}
+/>
+```
+
+**Features:**
+- **Interactive Slider**: Scrub through 0-100% of animation timeline
+- **Stage Visualization**: See Seed → Sprout → Leaves → Bud → Bloom transitions
+- **Real-time Preview**: Instant visual feedback as you drag the slider
+- **Progress Info**: Shows percentage and time remaining at any point
+- **Auto-activation**: Preview mode enables automatically when slider moves
+
+**Use Cases:**
+- **Design Iteration**: Quickly test visual changes across all animation stages
+- **Timing Verification**: Ensure smooth transitions between growth phases
+- **Performance Testing**: Check animation performance at different progress points
+- **Client Demos**: Show the full animation experience in seconds instead of 25 minutes
+
+#### Pixel Animation Debugging
+Built-in debug information displays real-time animation metrics:
+
+```typescript
+// Debug overlay shows:
+Timer: {currentPixelIndex}/{totalPixels} → 
+Flower: {pixelsToShow}/{fullFlower.length} | 
+Elapsed: {elapsedSeconds}s
+```
+
+**Animation Implementation Testing:**
+- Switch between PixelFlower variants by changing imports
+- Test different animation approaches (grid-based vs stage-based vs complex)
+- Verify pixel-perfect timing and progression
+- Monitor performance across different implementations
+
+#### Animation Architecture Choices
+```typescript
+// 1. Simple Grid Approach (PixelFlower.tsx)
+const pixelsToShow = Math.floor((currentPixelIndex / totalPixels) * fullFlower.length);
+
+// 2. Stage-Based Approach (PixelFlower.simple.tsx)  
+const isStageVisible = (targetStage) => currentIndex >= targetIndex;
+
+// 3. Complex Pixel Approach (PixelFlower.old.tsx)
+const getPixelOpacity = (pixelIndex) => pixelIndex <= currentPixelIndex ? 1 : 0.3;
+```
+
 ### Pre-commit Checklist
 - [ ] All tests passing
 - [ ] TypeScript compilation clean

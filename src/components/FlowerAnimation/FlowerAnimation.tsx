@@ -38,7 +38,7 @@ export const FlowerAnimation: React.FC<FlowerAnimationProps> = ({ animation, tim
     <div className="flower-animation">
       <div className="flower__container">
         {/* Pixel art flower - replaces old SVG approach */}
-        <PixelFlower stage={stage} progress={progress} />
+        <PixelFlower stage={stage} progress={progress} granularData={animation.granularData} />
       </div>
       
       <div className="flower__debug">

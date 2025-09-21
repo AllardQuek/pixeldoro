@@ -44,6 +44,13 @@
   box-shadow: inset 1px 1px 0 rgba(160, 82, 45, 0.5);
 }
 
+/* Seed-sprout transition pixels */
+.pixel.seed-sprout {
+  background: linear-gradient(to top, #8B4513, #6B8E23);
+  border-radius: 2px;
+  box-shadow: inset 1px 1px 0 rgba(160, 82, 45, 0.5);
+}
+
 /* Stem pixels */
 .pixel.stem {
   background: #4CAF50;
@@ -121,6 +128,11 @@
   position: relative;
   z-index: 4;
   margin-bottom: -8px;
+}
+
+.pixel-bloom-container {
+  position: relative;
+  z-index: 4;
 }
 
 .pixel-bloom {

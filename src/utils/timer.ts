@@ -1,20 +1,10 @@
 import type { TimerConfig, FlowerStage } from '../types';
 
-// Development mode flag - set to true for testing
-export const DEVELOPMENT_MODE = true;
-
 // Timer configuration constants
-export const TIMER_CONFIG: TimerConfig = DEVELOPMENT_MODE ? {
-  // Development: Much shorter durations for testing
-  workDuration: 10, // 10 seconds instead of 25 minutes
-  shortBreakDuration: 10, // 10 seconds instead of 5 minutes
-  longBreakDuration: 15, // 15 seconds instead of 15 minutes
-  cyclesBeforeLongBreak: 4,
-} : {
-  // Production: Normal pomodoro durations
-  workDuration: 25 * 60, // 25 minutes = 1500 seconds
-  shortBreakDuration: 5 * 60, // 5 minutes = 300 seconds
-  longBreakDuration: 15 * 60, // 15 minutes = 900 seconds
+export const TIMER_CONFIG: TimerConfig = {
+  workDuration: 25 * 60, // 25 minutes
+  shortBreakDuration: 5 * 60, // 5 minutes
+  longBreakDuration: 15 * 60, // 15 minutes
   cyclesBeforeLongBreak: 4,
 };
 
@@ -24,31 +14,31 @@ export const FLOWER_STAGES: FlowerStage[] = [
     name: 'seed',
     startPercent: 0,
     endPercent: 20,
-    duration: DEVELOPMENT_MODE ? 5 : 5 * 60, // 5 seconds or 5 minutes
+    duration: 5 * 60, // 5 minutes
   },
   {
     name: 'sprout',
     startPercent: 20,
     endPercent: 40,
-    duration: DEVELOPMENT_MODE ? 5 : 5 * 60, // 5 seconds or 5 minutes
+    duration: 5 * 60, // 5 minutes
   },
   {
     name: 'leaves',
     startPercent: 40,
     endPercent: 60,
-    duration: DEVELOPMENT_MODE ? 5 : 5 * 60, // 5 seconds or 5 minutes
+    duration: 5 * 60, // 5 minutes
   },
   {
     name: 'bud',
     startPercent: 60,
     endPercent: 80,
-    duration: DEVELOPMENT_MODE ? 5 : 5 * 60, // 5 seconds or 5 minutes
+    duration: 5 * 60, // 5 minutes
   },
   {
     name: 'bloom',
     startPercent: 80,
     endPercent: 100,
-    duration: DEVELOPMENT_MODE ? 5 : 5 * 60, // 5 seconds or 5 minutes
+    duration: 5 * 60, // 5 minutes
   },
 ];
 
@@ -102,7 +92,7 @@ export const getGranularProgress = (timeRemaining: number, totalDuration: number
   const elapsedSeconds = totalDuration - timeRemaining;
   
   // Dynamic pixel count based on duration for scalability
-  // Minimum 1 pixel per 2 seconds for good granularity
+  // Use a reasonable base pixel count that scales with duration
   const pixelsPerStage = Math.max(2, Math.floor(totalDuration / (5 * 2))); // 5 stages, 2 seconds per pixel minimum
   const totalPixels = pixelsPerStage * FLOWER_STAGES.length;
   
@@ -112,7 +102,14 @@ export const getGranularProgress = (timeRemaining: number, totalDuration: number
     : 0;
   
   // Pixels within current stage
-  const pixelsInCurrentStage = Math.floor(stageProgress * pixelsPerStage);
+  const pixelsInCurrentStage = timeRemaining <= 0 
+    ? pixelsPerStage // Show all pixels when completed
+    : Math.floor(stageProgress * pixelsPerStage);
+  
+  // Ensure completion shows maximum bloom
+  const finalPixelsInCurrentStage = (timeRemaining <= 0 && currentStage.name === 'bloom') 
+    ? pixelsPerStage 
+    : pixelsInCurrentStage;
   
   // Calculate interval for new pixel appearance
   const pixelInterval = totalPixels > 0 ? Math.max(1, Math.floor(totalDuration / totalPixels)) : 1;
@@ -124,7 +121,7 @@ export const getGranularProgress = (timeRemaining: number, totalDuration: number
     totalPixels,
     pixelsPerStage,
     currentPixelIndex,
-    pixelsInCurrentStage,
+    pixelsInCurrentStage: finalPixelsInCurrentStage,
     elapsedSeconds,
     shouldShowNewPixel: elapsedSeconds > 0 && elapsedSeconds % pixelInterval === 0,
     pixelInterval, // How often new pixels appear (in seconds)

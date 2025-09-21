@@ -1,21 +1,51 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
 interface DevControlsProps {
-  onSetTime: (seconds: number) => void;
   isDevelopmentMode: boolean;
+  onTimelineChange?: (progress: number) => void;
+  totalDuration?: number;
 }
 
-export const DevControls: React.FC<DevControlsProps> = ({ onSetTime, isDevelopmentMode }) => {
+export const DevControls: React.FC<DevControlsProps> = ({ 
+  isDevelopmentMode,
+  onTimelineChange,
+  totalDuration = 1500 // 25 minutes default
+}) => {
+  const [timelineProgress, setTimelineProgress] = useState(0);
+
+  const handleTimelineChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const progress = parseFloat(e.target.value);
+    setTimelineProgress(progress);
+    onTimelineChange?.(progress);
+  }, [onTimelineChange]);
+
   if (!isDevelopmentMode) return null;
 
   return (
     <div className="dev-controls">
-      <div className="dev-controls__label">🔧 Dev Mode</div>
-      <div className="dev-controls__buttons">
-        <button onClick={() => onSetTime(5)} className="dev-controls__btn">5s</button>
-        <button onClick={() => onSetTime(10)} className="dev-controls__btn">10s</button>
-        <button onClick={() => onSetTime(30)} className="dev-controls__btn">30s</button>
-        <button onClick={() => onSetTime(60)} className="dev-controls__btn">1m</button>
+      <div className="dev-controls__label">🔧 Animation Timeline</div>
+      
+      <div className="dev-controls__timeline">
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value={timelineProgress}
+          onChange={handleTimelineChange}
+          className="dev-controls__slider"
+        />
+        <div className="dev-controls__timeline-labels">
+          <span>Seed</span>
+          <span>Sprout</span>
+          <span>Leaves</span>
+          <span>Bud</span>
+          <span>Bloom</span>
+        </div>
+        <div className="dev-controls__timeline-info">
+          Progress: {Math.round(timelineProgress * 100)}% 
+          ({Math.round((1 - timelineProgress) * totalDuration)}s remaining)
+        </div>
       </div>
     </div>
   );

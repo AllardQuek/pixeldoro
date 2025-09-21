@@ -7,6 +7,7 @@ export interface PomodoroState {
   sessionsCompleted: number;
   currentCycle: number; // 1-4, resets after long break
   sessionStartTime: number; // Track the original duration for progress calculation
+  wasWorkCompleted: boolean; // Track if we just completed a work session
 }
 
 export interface AnimationProgress {

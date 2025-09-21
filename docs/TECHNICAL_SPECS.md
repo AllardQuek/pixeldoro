@@ -26,68 +26,147 @@ interface AnimationProgress {
   stage: 'seed' | 'sprout' | 'leaves' | 'bud' | 'bloom';
   progress: number; // 0-1 within current stage
   overallProgress: number; // 0-1 for entire session
+  granularData: {
+    overallProgress: number;
+    currentStage: FlowerStage;
+    stageProgress: number;
+    totalPixels: number;
+    pixelsPerStage: number;
+    currentPixelIndex: number;
+    pixelsInCurrentStage: number;
+    elapsedSeconds: number;
+    shouldShowNewPixel: boolean;
+    pixelInterval: number;
+  };
 }
 ```
+
+### Timeline Preview System
+```typescript
+interface TimelinePreviewHook {
+  timelineProgress: number;        // 0-1 slider position
+  isPreviewActive: boolean;        // Auto-activated when slider moves
+  handleTimelineChange: (progress: number) => void;
+  previewAnimation: AnimationProgress | null;
+  previewTimerState: PomodoroState | null;
+}
+```
+
+**Implementation Details:**
+- **Real-time Calculation**: Animation state computed from slider position
+- **Granular Progress**: Pixel-level animation data for precise previews
+- **State Override**: Preview states replace real timer states when active
+- **Performance Optimized**: useMemo for expensive calculations
+- **Auto-activation**: Preview mode enables when slider position > 0
 
 ## Flower Animation Stages
 
-### Stage 1: Seed (0-20% of session)
-- **Duration**: 5 minutes
-- **Visual**: Small brown seed in dark soil
-- **Animation**: Subtle pulse (scale 1.0-1.05, 2s duration)
-- **Transition**: Crack appears in seed shell
+### Pixel-Based Animation System
+The flower animation uses a 7×5 pixel grid system with progressive pixel reveal:
 
-### Stage 2: Sprout (20-40% of session)
-- **Duration**: 5 minutes  
-- **Visual**: Green shoot emerges from soil
-- **Animation**: Gradual height increase (transform: scaleY)
-- **Transition**: First leaf buds appear
+```typescript
+// Simplified flower definition (15 pixels total)
+const fullFlower = [
+  // Stem (pixels 0-2)
+  ['stem', 1, 2], ['stem', 2, 2], ['stem', 3, 2],
+  // Leaves (pixels 3-4)  
+  ['leaf', 3, 1], ['leaf', 3, 3],
+  // Bloom 3×3 grid (pixels 5-13)
+  ['petal', 4, 1], ['petal', 4, 2], ['petal', 4, 3],
+  ['petal', 5, 1], ['center-bright', 5, 2], ['petal', 5, 3],
+  ['petal', 6, 1], ['petal', 6, 2], ['petal', 6, 3],
+];
+```
+
+### Animation Implementations
+
+#### 1. Grid-Based Approach (PixelFlower.tsx)
+- **Concept**: Simple 15-pixel progression mapped to timer
+- **Debug**: Built-in progress overlay for development
+- **Performance**: Minimal computation, direct mapping
+
+#### 2. Stage-Based Approach (PixelFlower.simple.tsx)  
+- **Concept**: Traditional stage visibility with smooth transitions
+- **Animation**: Framer Motion for scale/opacity effects
+- **UX**: Clear visual progression through growth phases
+
+#### 3. Complex Pixel Approach (PixelFlower.old.tsx)
+- **Concept**: Dynamic pixel generation with opacity-based reveal
+- **Features**: Variable pixel counts, progressive opacity, detail enhancement
+- **Complexity**: Advanced timing and layered animations
+
+### Stage Specifications
+
+### Stage 1: Seed (0-20% of session)
+- **Visual**: Small brown seed in dark soil foundation
+- **Grid Position**: Row 0 (soil), minimal seed presence
+- **Animation**: Subtle pulse (scale 1.0-1.05, 2s duration)
+
+### Stage 2: Sprout (20-40% of session)  
+- **Visual**: Green stem emerging vertically from soil
+- **Grid Pixels**: Stem pixels [1,2], [2,2], [3,2] progressively revealed
+- **Animation**: Gradual scaleY growth from bottom origin
 
 ### Stage 3: Leaves (40-60% of session)
-- **Duration**: 5 minutes
-- **Visual**: 2-3 leaves unfurl from stem
-- **Animation**: Rotation from closed to open (rotate + scale)
-- **Transition**: Flower bud forms at stem tip
+- **Visual**: 2 leaves unfurling from stem sides
+- **Grid Pixels**: Leaf pixels [3,1] and [3,3] appear
+- **Animation**: Scale from 0 to full size with rotation
 
 ### Stage 4: Bud (60-80% of session)
-- **Duration**: 5 minutes
-- **Visual**: Closed flower bud grows larger
-- **Animation**: Scale increase + color saturation
-- **Transition**: Outer petals begin to separate
+- **Visual**: Closed flower bud at stem tip
+- **Grid Position**: Top rows preparing for bloom
+- **Animation**: Scale increase + color saturation buildup
 
 ### Stage 5: Bloom (80-100% of session)
-- **Duration**: 5 minutes
-- **Visual**: Petals open to reveal full flower
-- **Animation**: Petal rotation + opacity + scale
-- **Completion**: Sparkle particles + gentle glow
+- **Visual**: Full 3×3 flower with bright center and petals
+- **Grid Pixels**: Complete petal array with center-bright focal point
+- **Animation**: Petal unfurling + center sparkle effects
 
 ## CSS Animation Strategy
 
-### Hardware Acceleration
+### Pixel Art Rendering
 ```css
-.flower-element {
-  will-change: transform, opacity;
-  transform: translateZ(0); /* Force hardware acceleration */
+.pixel-flower-container {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.pixel-flower {
+  transform: scale(3); /* Magnify 8px pixels for visibility */
+}
+
+.pixel {
+  width: 8px;
+  height: 8px;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 ```
 
-### Keyframe Optimization
+### Hardware Acceleration
 ```css
-/* Prefer transform over layout properties */
-@keyframes grow {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
+.pixel-flower-container {
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU acceleration */
 }
+```
 
-/* Avoid animating: width, height, top, left */
-/* Prefer: transform, opacity, filter */
+### Responsive Scaling
+```css
+@media (max-width: 600px) {
+  .pixel-flower { transform: scale(2.5); }
+}
+@media (max-width: 400px) {
+  .pixel-flower { transform: scale(2); }
+}
 ```
 
 ### Performance Targets
 - **Frame Rate**: Consistent 60fps
-- **CPU Usage**: < 5% on modern browsers
-- **Memory**: < 50MB total page memory
+- **CPU Usage**: < 3% on modern browsers (achieved with pixel approach)
+- **Memory**: < 30MB total page memory (optimized from SVG approach)
 - **Bundle Size**: < 100KB gzipped
+- **Pixel Updates**: ~1 pixel per 100 seconds (25min / 15 pixels)
 
 ## Browser Compatibility
 

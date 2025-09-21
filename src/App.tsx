@@ -1,10 +1,10 @@
 import { usePomodoro } from './hooks/usePomodoro';
 import { useAnimation } from './hooks/useAnimation';
+import { useTimelinePreview } from './hooks/useTimelinePreview';
 import { Timer } from './components/Timer';
 import { Controls } from './components/Controls';
 import { FlowerAnimation } from './components/FlowerAnimation';
 import { DevControls } from './components/DevControls';
-import { DEVELOPMENT_MODE } from './utils/timer';
 import './App.css';
 
 function App() {
@@ -12,8 +12,20 @@ function App() {
   const animation = useAnimation({ 
     timeRemaining: state.timeRemaining, 
     phase: state.phase,
-    sessionStartTime: state.sessionStartTime
+    sessionStartTime: state.sessionStartTime,
+    wasWorkCompleted: state.wasWorkCompleted
   });
+
+  const timeline = useTimelinePreview();
+
+  // Use preview states when timeline slider is active, otherwise use real states
+  const displayState = timeline.isPreviewActive && timeline.previewTimerState 
+    ? timeline.previewTimerState 
+    : state;
+  
+  const displayAnimation = timeline.isPreviewActive && timeline.previewAnimation 
+    ? timeline.previewAnimation 
+    : animation;
 
   return (
     <div className="app">
@@ -25,18 +37,18 @@ function App() {
       <main className="app__main">
         <div className="app__animation">
           <FlowerAnimation 
-            animation={animation} 
-            timerState={state}
+            animation={displayAnimation} 
+            timerState={displayState}
           />
         </div>
         
         <div className="app__timer">
-          <Timer state={state} />
+          <Timer state={displayState} />
         </div>
         
         <div className="app__controls">
           <Controls 
-            state={state}
+            state={state} // Always use real state for controls
             onStart={controls.start}
             onPause={controls.pause}
             onReset={controls.reset}
@@ -46,8 +58,9 @@ function App() {
         
         <div className="app__dev-controls">
           <DevControls 
-            onSetTime={controls.setTime}
-            isDevelopmentMode={DEVELOPMENT_MODE}
+            isDevelopmentMode={true} // Enable for timeline feature
+            onTimelineChange={timeline.handleTimelineChange}
+            totalDuration={state.sessionStartTime}
           />
         </div>
       </main>
