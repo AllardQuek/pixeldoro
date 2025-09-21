@@ -1,0 +1,421 @@
+/* App Layout */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  padding: 1rem;
+}
+
+.app__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app__title {
+  font-size: 2rem;
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.app__subtitle {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin: 0.5rem 0 0 0;
+  font-weight: 300;
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Make flower animation the hero */
+.app__animation {
+  order: 1;
+}
+
+.app__controls {
+  order: 2;
+}
+
+.app__timer {
+  display: none; /* Hide separate timer component */
+}
+
+.app__dev-controls {
+  order: 3;
+}
+
+/* Timer Component - Minimalist secondary info */
+.timer {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 1rem 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 200px;
+  opacity: 0.8;
+}
+
+.timer__phase {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-bottom: 0.25rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timer__display {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0.5rem 0;
+  font-family: 'SF Mono', 'Monaco', monospace;
+  letter-spacing: -0.02em;
+}
+
+.timer__status {
+  font-size: 0.7rem;
+  opacity: 0.5;
+  margin-bottom: 0.5rem;
+}
+
+.timer__progress {
+  font-size: 0.6rem;
+  opacity: 0.4;
+}
+
+/* Controls Component - Clean and minimal */
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.controls__primary {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  min-width: 90px;
+  letter-spacing: 0.02em;
+}
+
+.controls__primary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+.controls__secondary,
+.controls__skip {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.6rem 1.25rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+}
+
+.controls__secondary:hover,
+.controls__skip:hover {
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.controls__secondary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.controls__secondary:disabled:hover {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Flower Animation Component - Clean hero focus */
+.flower-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.flower__container {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove the timer overlay from flower container */
+
+.flower__seed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flower__sprout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  width: 100%;
+}
+
+.flower__stem {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.flower__placeholder {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.flower__debug {
+  text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.9;
+  font-family: 'SF Mono', 'Monaco', monospace;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  min-width: 280px;
+  backdrop-filter: blur(10px);
+}
+
+/* Timer info section - merged with progress */
+.flower__timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.flower__timer-phase {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.flower__timer-display {
+  font-size: 1.8rem;
+  font-weight: 300;
+  font-family: 'SF Mono', 'Monaco', monospace;
+  letter-spacing: -0.02em;
+  margin: 0.25rem 0;
+}
+
+.flower__timer-status {
+  font-size: 0.65rem;
+  opacity: 0.5;
+}
+
+/* Progress info section */
+.flower__progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.flower__stage-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.flower__stage-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.8;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.flower__progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.flower__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #81C784);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.flower__progress-text {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+.flower__debug p {
+  margin: 0.1rem 0;
+}
+
+/* Enhanced debug info with session details */
+.flower__session-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  opacity: 0.5;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .app__title {
+    font-size: 1.75rem;
+  }
+  
+  .flower__container {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .flower__debug {
+    min-width: 240px;
+    padding: 0.75rem 1rem;
+  }
+  
+  .flower__timer-display {
+    font-size: 1.5rem;
+  }
+  
+  .flower__timer-phase {
+    font-size: 0.65rem;
+  }
+  
+  .flower__timer-status {
+    font-size: 0.6rem;
+  }
+  
+  .controls {
+    gap: 0.5rem;
+  }
+  
+  .controls__primary {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .controls__secondary,
+  .controls__skip {
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .app__main {
+    gap: 2rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .flower__seed {
+    animation: none !important;
+  }
+  
+  .controls__primary:hover,
+  .controls__secondary:hover,
+  .controls__skip:hover {
+    transform: none;
+  }
+}
+
+/* Development Controls - Even more subtle */
+.dev-controls {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  backdrop-filter: blur(10px);
+  opacity: 0.7;
+}
+
+.dev-controls__label {
+  font-size: 0.65rem;
+  opacity: 0.5;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dev-controls__buttons {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dev-controls__btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 35px;
+  font-weight: 400;
+}
+
+.dev-controls__btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
