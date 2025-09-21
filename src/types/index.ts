@@ -10,6 +10,20 @@ export interface PomodoroState {
   wasWorkCompleted: boolean; // Track if we just completed a work session
 }
 
+// Theme types for pixel art themes
+export interface ThemePixel {
+  type: string;
+  row: number;
+  col: number;
+}
+
+export interface BasicTheme {
+  id: string;
+  name: string;
+  gridSize: { width: number; height: number };
+  pixels: ThemePixel[];
+}
+
 export interface AnimationProgress {
   stage: 'seed' | 'sprout' | 'leaves' | 'bud' | 'bloom';
   progress: number; // 0-1 within current stage

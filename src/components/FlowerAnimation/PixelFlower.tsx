@@ -1,4 +1,5 @@
 import React from 'react';
+import { flowerTheme } from '../../data/themes';
 
 interface PixelFlowerProps {
   stage: 'seed' | 'sprout' | 'leaves' | 'bud' | 'bloom';
@@ -16,38 +17,28 @@ interface PixelFlowerProps {
 
 export const PixelFlower: React.FC<PixelFlowerProps> = ({ granularData, showDebugInfo = false }) => {
   
-  // Simple flower definition - just 15 pixels total in a clear progression
-  const fullFlower = [
-    // Stem (pixels 0-2)
-    ['stem', 1, 2], ['stem', 2, 2], ['stem', 3, 2],
-    
-    // Leaves (pixels 3-4)
-    ['leaf', 3, 1], ['leaf', 3, 3],
-    
-    // Bloom 3x3 grid (pixels 5-13) - yellow center + 8 pink petals
-    ['petal', 4, 1], ['petal', 4, 2], ['petal', 4, 3],     // bottom row
-    ['petal', 5, 1], ['center-bright', 5, 2], ['petal', 5, 3], // middle row
-    ['petal', 6, 1], ['petal', 6, 2], ['petal', 6, 3],     // top row
-  ];
+  // Use theme data instead of hard-coded array
+  const currentTheme = flowerTheme;
+  const fullFlower = currentTheme.pixels;
 
   // How many pixels to show based on timer progress
   const pixelsToShow = granularData && granularData.totalPixels > 0
     ? Math.floor((granularData.currentPixelIndex / granularData.totalPixels) * fullFlower.length)
     : 0;
   
-  // Create grid
-  const grid = Array(7).fill(null).map(() => Array(5).fill(null));
+  // Create grid using theme dimensions
+  const grid = Array(currentTheme.gridSize.height).fill(null).map(() => Array(currentTheme.gridSize.width).fill(null));
   
-  // Always show soil
-  for (let i = 0; i < 5; i++) {
+  // Always show soil (bottom row)
+  for (let i = 0; i < currentTheme.gridSize.width; i++) {
     grid[0][i] = 'soil';
   }
   
-  // Add pixels progressively
+  // Add pixels progressively using new data structure
   for (let i = 0; i < pixelsToShow && i < fullFlower.length; i++) {
-    const [type, row, col] = fullFlower[i];
-    if (grid[row as number] && grid[row as number][col as number] !== undefined) {
-      grid[row as number][col as number] = type as string;
+    const pixel = fullFlower[i];
+    if (grid[pixel.row] && grid[pixel.row][pixel.col] !== undefined) {
+      grid[pixel.row][pixel.col] = pixel.type;
     }
   }
 
