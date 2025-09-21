@@ -11,9 +11,10 @@ interface PixelFlowerProps {
     elapsedSeconds: number;
     shouldShowNewPixel: boolean;
   };
+  showDebugInfo?: boolean;
 }
 
-export const PixelFlower: React.FC<PixelFlowerProps> = ({ granularData }) => {
+export const PixelFlower: React.FC<PixelFlowerProps> = ({ granularData, showDebugInfo = false }) => {
   
   // Simple flower definition - just 15 pixels total in a clear progression
   const fullFlower = [
@@ -53,7 +54,7 @@ export const PixelFlower: React.FC<PixelFlowerProps> = ({ granularData }) => {
   return (
     <div className="pixel-flower-container">
       {/* Debug info */}
-      {granularData && (
+      {showDebugInfo && granularData && (
         <div style={{ fontSize: '10px', color: 'white', position: 'absolute', top: '-30px', left: '50%', transform: 'translateX(-50%)', zIndex: 10, background: 'rgba(0,0,0,0.5)', padding: '8px 12px', borderRadius: '4px', whiteSpace: 'nowrap', minWidth: '200px', textAlign: 'center' }}>
           Timer: {granularData.currentPixelIndex}/{granularData.totalPixels} → 
           Flower: {pixelsToShow}/{fullFlower.length} | 

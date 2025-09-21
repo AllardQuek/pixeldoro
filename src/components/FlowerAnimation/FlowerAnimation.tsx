@@ -8,9 +8,10 @@ import './PixelFlower.css';
 interface FlowerAnimationProps {
   animation: AnimationProgress;
   timerState: PomodoroState;
+  showDebugInfo?: boolean;
 }
 
-export const FlowerAnimation: React.FC<FlowerAnimationProps> = ({ animation, timerState }) => {
+export const FlowerAnimation: React.FC<FlowerAnimationProps> = ({ animation, timerState, showDebugInfo = false }) => {
   const { stage, progress, overallProgress } = animation;
   const { timeRemaining, phase, isActive, isPaused, sessionsCompleted, currentCycle } = timerState;
 
@@ -38,7 +39,7 @@ export const FlowerAnimation: React.FC<FlowerAnimationProps> = ({ animation, tim
     <div className="flower-animation">
       <div className="flower__container">
         {/* Pixel art flower - replaces old SVG approach */}
-        <PixelFlower stage={stage} progress={progress} granularData={animation.granularData} />
+        <PixelFlower stage={stage} progress={progress} granularData={animation.granularData} showDebugInfo={showDebugInfo} />
       </div>
       
       <div className="flower__debug">

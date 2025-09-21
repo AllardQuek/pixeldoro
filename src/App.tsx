@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { usePomodoro } from './hooks/usePomodoro';
 import { useAnimation } from './hooks/useAnimation';
 import { useTimelinePreview } from './hooks/useTimelinePreview';
@@ -8,6 +9,7 @@ import { DevControls } from './components/DevControls';
 import './App.css';
 
 function App() {
+  const [isDebugMode, setIsDebugMode] = useState(false);
   const { state, controls } = usePomodoro();
   const animation = useAnimation({ 
     timeRemaining: state.timeRemaining, 
@@ -29,6 +31,15 @@ function App() {
 
   return (
     <div className="app">
+      {/* Debug Toggle - Top Right */}
+      <button 
+        className="app__debug-toggle"
+        onClick={() => setIsDebugMode(!isDebugMode)}
+        title={isDebugMode ? 'Hide debug tools' : 'Show debug tools'}
+      >
+        {isDebugMode ? '🔧' : '⚙️'}
+      </button>
+
       <header className="app__header">
         <h1 className="app__title">🌸 Bloom Pomodoro</h1>
         <p className="app__subtitle">Focus • Grow • Bloom</p>
@@ -39,6 +50,7 @@ function App() {
           <FlowerAnimation 
             animation={displayAnimation} 
             timerState={displayState}
+            showDebugInfo={isDebugMode}
           />
         </div>
         
@@ -56,13 +68,15 @@ function App() {
           />
         </div>
         
-        <div className="app__dev-controls">
-          <DevControls 
-            isDevelopmentMode={true} // Enable for timeline feature
-            onTimelineChange={timeline.handleTimelineChange}
-            totalDuration={state.sessionStartTime}
-          />
-        </div>
+        {isDebugMode && (
+          <div className="app__dev-controls">
+            <DevControls 
+              isDevelopmentMode={true} // Enable for timeline feature
+              onTimelineChange={timeline.handleTimelineChange}
+              totalDuration={state.sessionStartTime}
+            />
+          </div>
+        )}
       </main>
     </div>
   );
