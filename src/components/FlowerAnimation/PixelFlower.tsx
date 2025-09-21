@@ -1,9 +1,11 @@
 import React from 'react';
 import { flowerTheme } from '../../data/themes';
+import type { BasicTheme } from '../../types';
 
 interface PixelFlowerProps {
   stage: 'seed' | 'sprout' | 'leaves' | 'bud' | 'bloom';
   progress: number; // 0-1 within current stage
+  theme?: BasicTheme; // Optional theme prop, defaults to flower
   granularData?: {
     totalPixels: number;
     pixelsPerStage: number;
@@ -15,10 +17,14 @@ interface PixelFlowerProps {
   showDebugInfo?: boolean;
 }
 
-export const PixelFlower: React.FC<PixelFlowerProps> = ({ granularData, showDebugInfo = false }) => {
+export const PixelFlower: React.FC<PixelFlowerProps> = ({ 
+  granularData, 
+  showDebugInfo = false,
+  theme = flowerTheme // Default to flower theme for backward compatibility
+}) => {
   
-  // Use theme data instead of hard-coded array
-  const currentTheme = flowerTheme;
+  // Use provided theme or default to flower
+  const currentTheme = theme;
   const themePixels = currentTheme.pixels;
 
   // How many pixels to show based on timer progress
@@ -37,6 +43,18 @@ export const PixelFlower: React.FC<PixelFlowerProps> = ({ granularData, showDebu
     }
   }
 
+  // Get appropriate icon based on theme
+  const getPlaceholderIcon = () => {
+    switch (currentTheme.id) {
+      case 'classic-flower':
+        return '🌱';
+      case 'winter-tree':
+        return '🌿';
+      default:
+        return '🌱';
+    }
+  };
+
   return (
     <div className="pixel-art-container">
       {/* Debug info */}
@@ -48,7 +66,16 @@ export const PixelFlower: React.FC<PixelFlowerProps> = ({ granularData, showDebu
         </div>
       )}
       
-      <div className="pixel-art-grid">
+      {/* Placeholder message when no pixels are shown yet */}
+      {pixelsToShow === 0 && (
+        <div className="pixel-art-placeholder">
+          <div className="placeholder-icon">{getPlaceholderIcon()}</div>
+          <div className="placeholder-text">Something beautiful awaits</div>
+          <div className="placeholder-subtext">Start focusing to reveal it</div>
+        </div>
+      )}
+      
+      <div className="pixel-art-grid" style={{ opacity: pixelsToShow === 0 ? 0.3 : 1 }}>
         {grid.map((row, rowIndex) => (
           <div key={rowIndex} className="pixel-row">
             {row.map((cellType, colIndex) => (

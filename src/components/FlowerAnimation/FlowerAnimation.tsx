@@ -1,5 +1,5 @@
 import React from 'react';
-import type { AnimationProgress } from '../../types';
+import type { AnimationProgress, BasicTheme } from '../../types';
 import type { PomodoroState } from '../../types';
 import { formatTime } from '../../utils/timer';
 import { PixelFlower } from './PixelFlower';
@@ -8,10 +8,11 @@ import './PixelFlower.css';
 interface FlowerAnimationProps {
   animation: AnimationProgress;
   timerState: PomodoroState;
+  theme?: BasicTheme;
   showDebugInfo?: boolean;
 }
 
-export const FlowerAnimation: React.FC<FlowerAnimationProps> = ({ animation, timerState, showDebugInfo = false }) => {
+export const FlowerAnimation: React.FC<FlowerAnimationProps> = ({ animation, timerState, theme, showDebugInfo = false }) => {
   const { stage, progress, overallProgress } = animation;
   const { timeRemaining, phase, isActive, isPaused, sessionsCompleted, currentCycle } = timerState;
 
@@ -39,7 +40,13 @@ export const FlowerAnimation: React.FC<FlowerAnimationProps> = ({ animation, tim
     <div className="flower-animation">
       <div className="flower__container">
         {/* Pixel art flower - replaces old SVG approach */}
-        <PixelFlower stage={stage} progress={progress} granularData={animation.granularData} showDebugInfo={showDebugInfo} />
+        <PixelFlower 
+          stage={stage} 
+          progress={progress} 
+          theme={theme}
+          granularData={animation.granularData} 
+          showDebugInfo={showDebugInfo} 
+        />
       </div>
       
       <div className="flower__debug">

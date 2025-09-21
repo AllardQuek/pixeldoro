@@ -2,14 +2,17 @@ import { useState } from 'react';
 import { usePomodoro } from './hooks/usePomodoro';
 import { useAnimation } from './hooks/useAnimation';
 import { useTimelinePreview } from './hooks/useTimelinePreview';
+import { useTheme } from './hooks/useTheme';
 import { Timer } from './components/Timer';
 import { Controls } from './components/Controls';
 import { FlowerAnimation } from './components/FlowerAnimation';
+import { ThemeSelector } from './components/ThemeSelector';
 import { DevControls } from './components/DevControls';
 import './App.css';
 
 function App() {
   const [isDebugMode, setIsDebugMode] = useState(false);
+  const theme = useTheme();
   const { state, controls } = usePomodoro();
   const animation = useAnimation({ 
     timeRemaining: state.timeRemaining, 
@@ -43,6 +46,15 @@ function App() {
       <header className="app__header">
         <h1 className="app__title">🌸 Bloom Pomodoro</h1>
         <p className="app__subtitle">Focus • Grow • Bloom</p>
+        
+        {/* Theme Selector in header */}
+        <ThemeSelector 
+          currentTheme={theme.currentTheme}
+          availableThemes={theme.availableThemes}
+          isRandomized={theme.isRandomized}
+          onThemeSelect={theme.selectTheme}
+          onRandomize={theme.randomizeTheme}
+        />
       </header>
       
       <main className="app__main">
@@ -50,6 +62,7 @@ function App() {
           <FlowerAnimation 
             animation={displayAnimation} 
             timerState={displayState}
+            theme={theme.currentTheme}
             showDebugInfo={isDebugMode}
           />
         </div>

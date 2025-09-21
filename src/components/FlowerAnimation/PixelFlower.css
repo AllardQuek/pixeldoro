@@ -100,6 +100,24 @@
   animation: center-sparkle 2s ease-in-out infinite alternate;
 }
 
+/* Oak Tree Theme Pixels */
+.pixel.trunk {
+  background: #8B4513;
+  box-shadow: inset 1px 1px 0 rgba(139, 101, 19, 0.5);
+}
+
+.pixel.branch {
+  background: #A0522D;
+  border-radius: 1px;
+  box-shadow: inset 1px 1px 0 rgba(160, 102, 65, 0.5);
+}
+
+.pixel.leaves {
+  background: #228B22;
+  border-radius: 2px 1px 2px 1px;
+  box-shadow: inset 1px 1px 0 rgba(60, 179, 113, 0.5);
+}
+
 /* Component positioning */
 .pixel-soil {
   position: relative;
@@ -179,6 +197,51 @@
   }
 }
 
+/* Placeholder styles for empty state */
+.pixel-art-placeholder {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  user-select: none;
+  pointer-events: none;
+}
+
+.placeholder-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+  animation: placeholderPulse 2s ease-in-out infinite;
+}
+
+.placeholder-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.placeholder-subtext {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+@keyframes placeholderPulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
 /* Accessibility - respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .pixel-art-grid {
@@ -187,6 +250,10 @@
   
   .pixel.petal,
   .pixel.center-bright {
+    animation: none;
+  }
+  
+  .placeholder-icon {
     animation: none;
   }
 }

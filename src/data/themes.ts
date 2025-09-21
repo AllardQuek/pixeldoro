@@ -44,3 +44,48 @@ export const flowerTheme: BasicTheme = {
     { type: 'petal', row: 6, col: 3 },
   ]
 };
+
+// Simple tree theme to test multi-theme system
+export const treeTheme: BasicTheme = {
+  id: 'oak-tree',
+  name: 'Oak Tree',
+  gridSize: { width: 7, height: 8 },
+  
+  // All pixels build progressively: soil → trunk → branches → leaves
+  pixels: [
+    // Stage 0: Soil preparation (pixels 0-6)
+    { type: 'soil', row: 0, col: 0 },
+    { type: 'soil', row: 0, col: 1 },
+    { type: 'soil', row: 0, col: 2 },
+    { type: 'soil', row: 0, col: 3 },
+    { type: 'soil', row: 0, col: 4 },
+    { type: 'soil', row: 0, col: 5 },
+    { type: 'soil', row: 0, col: 6 },
+    
+    // Stage 1: Trunk growth (pixels 7-10)
+    { type: 'trunk', row: 1, col: 3 },
+    { type: 'trunk', row: 2, col: 3 },
+    { type: 'trunk', row: 3, col: 3 },
+    { type: 'trunk', row: 4, col: 3 },
+    
+    // Stage 2: Branch development (pixels 11-14)
+    { type: 'branch', row: 5, col: 2 },
+    { type: 'branch', row: 5, col: 3 },
+    { type: 'branch', row: 5, col: 4 },
+    { type: 'branch', row: 6, col: 1 },
+    
+    // Stage 3: More branches (pixels 15-18)
+    { type: 'branch', row: 6, col: 5 },
+    { type: 'branch', row: 7, col: 0 },
+    { type: 'branch', row: 7, col: 2 },
+    { type: 'branch', row: 7, col: 4 },
+    
+    // Stage 4: Leaves fill in (pixels 19-24)
+    { type: 'leaves', row: 7, col: 1 },
+    { type: 'leaves', row: 7, col: 3 },
+    { type: 'leaves', row: 7, col: 5 },
+    { type: 'leaves', row: 7, col: 6 },
+    { type: 'leaves', row: 6, col: 2 },
+    { type: 'leaves', row: 6, col: 4 },
+  ]
+};
