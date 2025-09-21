@@ -1,69 +1,161 @@
-# React + TypeScript + Vite
+# 🌸 Bloom Pomodoro Timer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An innovative and visually engaging pomodoro timer that transforms productivity into a beautiful, meditative experience. Instead of watching numbers count down, users witness a flower bloom from seed to full blossom during their 25-minute focus sessions.
 
-Currently, two official plugins are available:
+## 🎯 Vision & Goals
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Core Philosophy
+- **Visual over Numerical**: Replace traditional countdown timers with meaningful visual metaphors
+- **Engaging & Meditative**: Create an experience that's both motivating and calming
+- **Lightweight & Fast**: Prioritize performance and quick loading times
+- **Minimalist Design**: Focus on essential features with elegant execution
 
-## Expanding the ESLint configuration
+### Key Differentiators
+- **Blooming Flower Animation**: Watch a seed grow into a beautiful flower over 25 minutes
+- **Seamless Progress Tracking**: Subtle, non-intrusive ways to monitor progress
+- **Peripheral Awareness**: Users can focus on work while staying aware of timer state
+- **Aesthetic Focus**: Beautiful enough that users want to keep it open
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Technical Architecture
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Tech Stack
+- **Frontend**: React 18 with TypeScript
+- **Build Tool**: Vite (fast dev experience, optimized builds)
+- **Animations**: CSS Animations + SVG graphics
+- **Animation Library**: Framer Motion (lightweight, 34kb gzipped)
+- **Styling**: CSS Modules or Styled Components (TBD)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Performance Priorities
+- **Lightweight Bundle**: Minimize JavaScript payload
+- **Smooth Animations**: 60fps animations using CSS transforms
+- **Fast Loading**: Optimized SVG assets and code splitting
+- **Low CPU Usage**: Hardware-accelerated animations where possible
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🌱 Feature Roadmap
+
+### MVP Features (Phase 1)
+- [ ] Basic pomodoro timer logic (25min work, 5min break)
+- [ ] Blooming flower animation with 5 growth stages
+- [ ] Start/Pause/Reset functionality
+- [ ] Tab title progress indicator
+- [ ] Favicon animation
+- [ ] Completion notification
+
+### Enhanced Features (Phase 2)
+- [ ] Sound effects and ambient audio
+- [ ] Multiple visual themes
+- [ ] Custom session durations
+- [ ] Session statistics and streaks
+- [ ] Browser notification integration
+
+### Advanced Features (Phase 3)
+- [ ] Achievement system
+- [ ] Daily/weekly progress visualization
+- [ ] Focus session analytics
+- [ ] Team/collaborative features
+
+## 🎨 Flower Animation Design
+
+### Growth Stages (25 minutes total)
+1. **Seed Stage** (0-5 min): Simple dot with subtle pulse animation
+2. **Sprout Stage** (5-10 min): Stem emerges from soil
+3. **Leaf Stage** (10-15 min): First leaves unfurl
+4. **Bud Stage** (15-20 min): Flower bud forms at stem tip
+5. **Bloom Stage** (20-25 min): Petals gradually open
+6. **Celebration** (completion): Brief sparkle/glow effect
+
+### Technical Implementation
+- **SVG-based graphics**: Scalable, lightweight, animatable
+- **CSS keyframe animations**: Smooth, hardware-accelerated
+- **Progressive disclosure**: Elements appear/animate only when needed
+- **State-driven**: Animation progress tied to timer state
+
+## 🎯 User Experience Flow
+
+### Core Interaction
+1. User opens app (instant load)
+2. Sees minimalist interface with seed/soil
+3. Clicks start → growth animation begins
+4. User focuses on work while peripherally aware of progress
+5. Flower completes bloom → gentle notification
+6. Break timer starts with different visual (wilting/resting?)
+
+### Progress Awareness
+- **Primary**: Visual flower growth
+- **Secondary**: Browser tab title updates ("🌱 15:30 remaining")
+- **Tertiary**: Subtle favicon animation
+- **Completion**: Gentle notification + visual celebration
+
+## 📁 Project Structure
+
+```
+pomodoro/
+├── src/
+│   ├── components/
+│   │   ├── Timer/
+│   │   ├── FlowerAnimation/
+│   │   └── Controls/
+│   ├── hooks/
+│   │   ├── usePomodoro.ts
+│   │   └── useAnimation.ts
+│   ├── utils/
+│   │   ├── timer.ts
+│   │   └── notifications.ts
+│   ├── assets/
+│   │   └── flower-stages/
+│   └── styles/
+├── public/
+└── docs/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Development Approach
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Phase 1: Foundation (Week 1)
+- Set up Vite + React + TypeScript
+- Implement basic timer logic
+- Create static flower SVG stages
+- Basic start/pause/reset functionality
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Phase 2: Animation (Week 2)
+- Implement CSS-based growth animations
+- Connect animation progress to timer state
+- Add progress indicators (tab title, favicon)
+- Polish transitions and timing
+
+### Phase 3: Enhancement (Week 3)
+- Add break timer visualization
+- Implement completion notifications
+- Performance optimization
+- User testing and refinement
+
+## 🎨 Design Principles
+
+### Visual Design
+- **Organic & Natural**: Soft curves, natural colors
+- **Minimalist Interface**: Clean, uncluttered layout
+- **Subtle Interactions**: Gentle hover effects, smooth transitions
+- **Accessible Colors**: High contrast, color-blind friendly
+
+### Animation Principles
+- **Purposeful Motion**: Every animation serves a functional purpose
+- **Natural Timing**: Ease-in-out curves that feel organic
+- **Anticipation**: Subtle hints about upcoming growth stages
+- **Celebration**: Satisfying completion animations
+
+## 📊 Success Metrics
+
+### User Engagement
+- Session completion rate
+- Return usage frequency
+- Time spent with app open
+- User feedback on visual appeal
+
+### Technical Performance
+- First contentful paint < 1s
+- Animation frame rate consistency
+- Bundle size < 100kb
+- Memory usage optimization
+
+---
+
+*This project aims to prove that productivity tools can be both functional and beautiful, turning the mundane task of time tracking into a delightful, meditative experience.*
