@@ -21,7 +21,7 @@ export interface BasicTheme {
   id: string;
   name: string;
   gridSize: { width: number; height: number };
-  pixels: ThemePixel[];
+  pixels: ThemePixel[]; // All pixels are progressive, including base/foundation
 }
 
 export interface AnimationProgress {

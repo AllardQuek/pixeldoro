@@ -1,6 +1,6 @@
-/* Pixel Art Flower Styles */
+/* Pixel Art Theme Styles */
 
-.pixel-flower-container {
+.pixel-art-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@
   image-rendering: crisp-edges;
 }
 
-.pixel-flower {
+.pixel-art-grid {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -168,20 +168,20 @@
 
 /* Responsive scaling */
 @media (max-width: 600px) {
-  .pixel-flower {
+  .pixel-art-grid {
     transform: scale(2.5);
   }
 }
 
 @media (max-width: 400px) {
-  .pixel-flower {
+  .pixel-art-grid {
     transform: scale(2);
   }
 }
 
 /* Accessibility - respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .pixel-flower {
+  .pixel-art-grid {
     animation: none;
   }
   
